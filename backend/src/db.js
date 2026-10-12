@@ -75,6 +75,13 @@ function initDb() {
     );
   `);
 
+  try {
+    db.exec('ALTER TABLE sarees ADD COLUMN image TEXT;');
+  } catch (e) {
+    // Column already exists
+  }
+  db.exec(`UPDATE sarees SET image = 'assets/products/' || id || '.jpg' WHERE image IS NULL OR image = '';`);
+
   seedInitialData();
 }
 

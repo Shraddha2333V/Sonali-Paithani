@@ -15,8 +15,11 @@
 <header class="site-header">
   <div class="container nav">
     <a href="index.html" class="brand">
-      <span class="brand-mark">Sonali Paithani</span>
-      <span class="brand-dev">सोनाली पैठणी</span>
+      <img src="images/logo.png" alt="Sonali Paithani" class="brand-logo" onerror="this.src='assets/images/logo.png';">
+      <span class="brand-text">
+        <span class="brand-mark">Sonali Paithani</span>
+        <span class="brand-dev">सोनाली पैठणी</span>
+      </span>
     </a>
     <nav class="nav-links hide-mobile">
       <a href="index.html">Home</a>
@@ -50,12 +53,20 @@
 </header>
 
 <div class="mobile-drawer">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; padding-bottom:12px; border-bottom:1px solid rgba(107,30,43,0.12);">
+    <div class="brand">
+      <img src="images/logo.png" alt="Sonali Paithani" class="brand-logo" style="width:36px; height:36px;" onerror="this.src='assets/images/logo.png';">
+      <span class="brand-mark" style="font-size:1.15rem;">Sonali Paithani</span>
+    </div>
+    <button class="nav-drawer-close" aria-label="Close menu">✕</button>
+  </div>
   <a href="index.html">Home</a>
   <a href="collections.html">Collections</a>
   <a href="index.html#ai-features">AI Stylist</a>
   <a href="index.html#story">Our Story</a>
   <a href="index.html#footer">Contact</a>
   <a href="auth.html">Sign Up / Log In</a>
+  <a href="employee-dashboard.html">Staff Dashboard</a>
 </div>
 
 <section class="section-tight">
@@ -86,7 +97,10 @@
 <footer class="site-footer" id="footer">
   <div class="container footer-grid">
     <div class="footer-brand">
-      <div class="brand-mark" style="color:var(--gold-300);font-size:1.4rem;">Sonali Paithani</div>
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+        <img src="images/logo.png" alt="Sonali Paithani" class="brand-logo" style="width:38px; height:38px;" onerror="this.src='assets/images/logo.png';">
+        <div class="brand-mark" style="color:var(--gold-300);font-size:1.35rem;">Sonali Paithani</div>
+      </div>
       <p>Handwoven Paithani sarees, sourced directly from weaving families in Paithan &amp; Yeola, Maharashtra.</p>
     </div>
     <div>
@@ -206,15 +220,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("page-title").textContent = `${p.name} — Sonali Paithani`;
   document.getElementById("crumb-name").textContent = p.name;
 
+  const imgSrc = p.image || `assets/products/${p.id}.jpg`;
+
   document.getElementById("pd-root").innerHTML = `
     <div class="pd-gallery reveal">
-      <div class="pd-hero-swatch" style="background:linear-gradient(155deg, ${p.swatch[0]}, ${p.swatch[1]})">
+      <div class="pd-hero-swatch" id="pd-main-swatch" style="background:linear-gradient(155deg, ${p.swatch[0]}, ${p.swatch[1]})">
+        <img class="card-img" id="pd-hero-img" src="${imgSrc}" alt="${p.name}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;" onerror="this.style.opacity='0';" />
         <div class="swatch-motif"></div>
       </div>
       <div class="pd-thumbs">
-        <div class="pd-thumb active" style="background:${p.swatch[0]}"></div>
-        <div class="pd-thumb" style="background:${p.swatch[1]}"></div>
-        <div class="pd-thumb" style="background:linear-gradient(155deg, ${p.swatch[0]}, ${p.swatch[1]})"></div>
+        <div class="pd-thumb active" data-view="photo" style="background-image:url('${imgSrc}');background-size:cover;background-position:center;" title="Photo"></div>
+        <div class="pd-thumb" data-view="c1" style="background:${p.swatch[0]}" title="Body colour"></div>
+        <div class="pd-thumb" data-view="c2" style="background:${p.swatch[1]}" title="Pallu / Zari tone"></div>
       </div>
     </div>
     <div class="reveal">
@@ -247,6 +264,25 @@ document.addEventListener("DOMContentLoaded", async () => {
     related = SAREES.filter(s => s.id !== p.id && s.occasion.some(o => p.occasion.includes(o))).slice(0, 4);
   }
   renderGrid(document.getElementById("related-grid"), related.length ? related : (typeof SAREES !== 'undefined' ? SAREES.filter(s => s.id !== p.id).slice(0,4) : []));
+
+  const heroImg = document.getElementById("pd-hero-img");
+  const heroSwatch = document.getElementById("pd-main-swatch");
+  document.querySelectorAll(".pd-thumb").forEach((th) => {
+    th.addEventListener("click", () => {
+      document.querySelectorAll(".pd-thumb").forEach(t => t.classList.remove("active"));
+      th.classList.add("active");
+      const view = th.dataset.view;
+      if (view === "photo") {
+        if (heroImg) heroImg.style.display = "block";
+      } else if (view === "c1") {
+        if (heroImg) heroImg.style.display = "none";
+        if (heroSwatch) heroSwatch.style.background = p.swatch[0];
+      } else if (view === "c2") {
+        if (heroImg) heroImg.style.display = "none";
+        if (heroSwatch) heroSwatch.style.background = p.swatch[1];
+      }
+    });
+  });
 
   initScrollReveal();
   initModal();

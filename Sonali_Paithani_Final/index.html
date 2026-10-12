@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sonali Paithani — Handwoven Paithani Sarees</title>
+<meta name="description" content="Sonali Paithani — handwoven Paithani sarees from Paithan &amp; Yeola. Browse the collection, get AI-matched picks for your event, and book a viewing." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<div class="announce-bar">Book a <strong>free styling consultation</strong> this festive season — limited slots at the Yeola shop.</div>
+
+<header class="site-header">
+  <div class="container nav">
+    <a href="index.html" class="brand">
+      <img src="images/logo.png" alt="Sonali Paithani" class="brand-logo" onerror="this.src='assets/images/logo.png';">
+      <span class="brand-text">
+        <span class="brand-mark">Sonali Paithani</span>
+        <span class="brand-dev">सोनाली पैठणी</span>
+      </span>
+    </a>
+    <nav class="nav-links hide-mobile">
+      <a href="index.html" class="active">Home</a>
+      <div class="nav-drop">
+        <a href="collections.html">Shop By <span class="nav-caret">▾</span></a>
+        <div class="nav-drop-panel">
+          <a href="collections.html?occasion=wedding">Bridal Paithani</a>
+          <a href="collections.html?occasion=festive">Festive Silk</a>
+          <a href="collections.html?occasion=office">Everyday Silk</a>
+          <a href="collections.html?occasion=gifting">Gifting</a>
+        </div>
+      </div>
+      <div class="nav-drop">
+        <a href="collections.html">Occasion <span class="nav-caret">▾</span></a>
+        <div class="nav-drop-panel">
+          <a href="collections.html?occasion=wedding">Wedding</a>
+          <a href="collections.html?occasion=reception">Reception</a>
+          <a href="collections.html?occasion=haldi">Haldi</a>
+          <a href="collections.html?occasion=festive">Festive / Diwali</a>
+        </div>
+      </div>
+      <a href="collections.html">Best Seller</a>
+      <a href="collections.html">New Arrival</a>
+      <a href="index.html#ai-features">AI Stylist</a>
+      <a href="index.html#story">Our Story</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn hide-mobile" aria-label="Search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      </button>
+      <a href="auth.html" class="icon-btn hide-mobile" aria-label="Account">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"/></svg>
+      </a>
+      <button class="icon-btn hide-mobile" aria-label="Wishlist">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+        <span class="icon-badge" data-wish-count>0</span>
+      </button>
+      <a href="collections.html" class="icon-btn hide-mobile" aria-label="Collection">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2l1.5 4h9L18 2"/><path d="M3.5 8h17l-1.4 12.2a2 2 0 0 1-2 1.8H6.9a2 2 0 0 1-2-1.8L3.5 8z"/></svg>
+        <span class="icon-badge">0</span>
+      </a>
+      <button class="nav-toggle show-mobile" aria-label="Menu"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-drawer">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; padding-bottom:12px; border-bottom:1px solid rgba(107,30,43,0.12);">
+    <div class="brand">
+      <img src="images/logo.png" alt="Sonali Paithani" class="brand-logo" style="width:36px; height:36px;" onerror="this.src='assets/images/logo.png';">
+      <span class="brand-mark" style="font-size:1.15rem;">Sonali Paithani</span>
+    </div>
+    <button class="nav-drawer-close" aria-label="Close menu">✕</button>
+  </div>
+  <a href="index.html">Home</a>
+  <a href="collections.html">Collections</a>
+  <a href="index.html#ai-features">AI Stylist</a>
+  <a href="index.html#story">Our Story</a>
+  <a href="index.html#footer">Contact</a>
+  <a href="auth.html">Sign Up / Log In</a>
+  <a href="employee-dashboard.html">Staff Dashboard</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <!-- Rotating background photos — swaps every 10s, loops forever.
+       See js/hero-slider.js for the photo list, timing, and the
+       note about replacing these placeholder photos with the
+       shop's own before launch. -->
+  <div class="hero-bg-slide is-active" data-slide="0"></div>
+  <div class="hero-bg-slide" data-slide="1"></div>
+
+  <div class="hero-slide-tag" id="hero-slide-tag">Bridal Collection</div>
+
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <div class="hero-eyebrow">A Legacy Woven In</div>
+      <div class="hero-script">सोनाली पैठणी</div>
+      <div class="hero-rule"><span></span><i></i><span></span></div>
+      <p class="hero-tagline">The Authenticity Passed Down, Not Just Promised.</p>
+      <div class="hero-cta">
+        <a href="collections.html" class="btn btn-gold">Explore The Collection</a>
+        <a href="#ai-features" class="btn btn-ghost">Try the AI Stylist</a>
+      </div>
+      <div class="hero-trust">
+        <div><strong>170+</strong>Sarees in stock</div>
+        <div><strong>3</strong>Generations weaving</div>
+        <div><strong>100%</strong>Handloom silk</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-currency">INR <span class="nav-caret">▾</span></div>
+  <div class="hero-scroll-mark" aria-hidden="true"><span></span></div>
+</section>
+
+<div class="zari-divider"></div>
+
+<!-- SHOP BY OCCASION -->
+<section class="section-tight">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Shop by range</div>
+      <h2 class="section-title">What's the occasion?</h2>
+      <p class="section-sub">Every Paithani in the shop, sorted the way you actually shop for one.</p>
+    </div>
+    <div class="occasion-strip" id="occasion-strip"></div>
+  </div>
+</section>
+
+<!-- FEATURED -->
+<section class="section" style="background:var(--white);">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Bestsellers</div>
+      <h2 class="section-title">This season's most-booked pieces</h2>
+      <p class="section-sub">A running list of what other customers are choosing right now.</p>
+    </div>
+    <div class="grid" id="featured-grid"></div>
+    <div class="text-center mt-32">
+      <a href="collections.html" class="btn btn-outline">View Full Collection</a>
+    </div>
+  </div>
+</section>
+
+<div class="zari-divider"></div>
+
+<!-- AI FEATURES -->
+<section class="section" id="ai-features">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Shop smarter</div>
+      <h2 class="section-title">Two AI tools, built around how Paithani is actually bought</h2>
+      <p class="section-sub">No account needed — try both right on this page.</p>
+    </div>
+    <div class="ai-panels">
+      <div class="ai-panel reveal">
+        <div class="eyebrow">AI Stylist Chat</div>
+        <h3>Tell it the event. It shortlists the sarees.</h3>
+        <p>Wedding, Haldi, a Diwali get-together, or a gift for your mother-in-law — the assistant asks a few quick questions and pulls three matches from our real stock, with the reasoning shown.</p>
+        <button class="btn btn-gold mt-32" onclick="document.querySelector('.chat-launcher').click()">Open the Stylist</button>
+      </div>
+      <div class="ai-panel teal reveal">
+        <div class="eyebrow">See It On You</div>
+        <h3>Preview the drape before you visit.</h3>
+        <p>Upload a photo and get a quick preview of how a saree's colours and pallu sit on you. A demo today — full photo-realistic try-on is the first thing we're upgrading post-launch.</p>
+        <a href="#tryon" class="btn btn-ghost mt-32">Try It Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRY-ON DEMO -->
+<section class="section" style="background:var(--white);" id="tryon">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Demo</div>
+      <h2 class="section-title">See It On You</h2>
+      <p class="section-sub">Upload a photo, pick a saree, and generate a quick colour-and-drape preview.</p>
+    </div>
+    <div class="tryon-demo">
+      <div class="tryon-upload reveal">
+        <label for="tryon-file" class="btn btn-primary">Upload Your Photo</label>
+        <input type="file" id="tryon-file" accept="image/*" />
+        <p style="margin-top:16px;">Choose a well-lit, front-facing photo for the best preview.</p>
+        <div class="form-field" style="text-align:left;">
+          <label for="tryon-saree-select">Choose a saree to preview</label>
+          <select id="tryon-saree-select"></select>
+        </div>
+        <button id="tryon-generate" class="btn btn-gold btn-block" disabled>Generate Preview</button>
+        <div class="tryon-note">Demo preview only — a colour-and-drape approximation, not final photo-realistic try-on.</div>
+      </div>
+      <div class="tryon-canvas-wrap reveal">
+        <div class="tryon-placeholder">Your preview will appear here after you upload a photo.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="zari-divider"></div>
+
+<!-- STORY -->
+<section class="section" id="story">
+  <div class="container story">
+    <div class="story-art reveal"></div>
+    <div class="reveal">
+      <div class="eyebrow">Our Story</div>
+      <h2 class="section-title">One family, three generations, one loom.</h2>
+      <p class="section-sub">Sonali Paithani works directly with weaving families in Paithan and Yeola — the two towns where the real, hand-thrown-shuttle Paithani is still made. Every saree on this site is stock we hold ourselves; nothing here is drop-shipped.</p>
+      <div class="story-list">
+        <div class="story-item">
+          <div class="num">01</div>
+          <div><h4>Sourced, not mass-produced</h4><p>Each piece comes from a named weaving family, tracked by loom and weaver.</p></div>
+        </div>
+        <div class="story-item">
+          <div class="num">02</div>
+          <div><h4>Checked before it's listed</h4><p>Zari purity, border symmetry and pallu weight are checked in-shop before a saree goes online.</p></div>
+        </div>
+        <div class="story-item">
+          <div class="num">03</div>
+          <div><h4>Try before you commit</h4><p>Book a fitting-room slot or a video call — most brides don't buy sight-unseen, and neither do we expect you to.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer" id="footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+        <img src="images/logo.png" alt="Sonali Paithani" class="brand-logo" style="width:38px; height:38px;" onerror="this.src='assets/images/logo.png';">
+        <div class="brand-mark" style="color:var(--gold-300);font-size:1.35rem;">Sonali Paithani</div>
+      </div>
+      <p>Handwoven Paithani sarees, sourced directly from weaving families in Paithan &amp; Yeola, Maharashtra.</p>
+    </div>
+    <div>
+      <h5>Shop</h5>
+      <ul>
+        <li><a href="collections.html">All Collections</a></li>
+        <li><a href="collections.html?occasion=wedding">Bridal</a></li>
+        <li><a href="collections.html?occasion=gifting">Gifting</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Company</h5>
+      <ul>
+        <li><a href="index.html#story">Our Story</a></li>
+        <li><a href="index.html#ai-features">AI Stylist</a></li>
+        <li><a href="#" data-wa="Hi, I have a question for Sonali Paithani.">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Visit</h5>
+      <ul>
+        <li>Yeola, Nashik District, Maharashtra</li>
+        <li>hello@sonalipaithani.example</li>
+        <li>Open Mon–Sat, 10am–8pm</li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 Sonali Paithani. Prototype build.</span>
+    <span>Made for a client demo — replace sample copy &amp; photos before launch.</span>
+  </div>
+</footer>
+
+<!-- FLOATING WIDGETS -->
+<a href="#" class="wa-float" data-wa="Hi Sonali Paithani, I'd like to know more about your sarees." aria-label="Chat on WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 32 32" fill="white"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.386.693 4.61 1.885 6.487L4 29l7.71-1.85A11.94 11.94 0 0 0 16.001 27C22.63 27 28 21.627 28 15S22.63 3 16.001 3zm0 21.6c-1.98 0-3.833-.55-5.415-1.507l-.388-.23-4.573 1.098 1.12-4.457-.253-.402A9.55 9.55 0 0 1 6.4 15c0-5.294 4.307-9.6 9.601-9.6 5.293 0 9.6 4.306 9.6 9.6 0 5.293-4.307 9.6-9.6 9.6zm5.264-7.19c-.288-.144-1.706-.842-1.97-.938-.264-.096-.456-.144-.648.144-.192.288-.744.938-.912 1.13-.168.192-.336.216-.624.072-.288-.144-1.216-.448-2.317-1.43-.856-.763-1.435-1.706-1.603-1.994-.168-.288-.018-.444.126-.588.13-.129.288-.336.432-.504.144-.168.192-.288.288-.48.096-.192.048-.36-.024-.504-.072-.144-.648-1.562-.888-2.14-.234-.562-.472-.486-.648-.495-.168-.009-.36-.011-.552-.011-.192 0-.504.072-.768.36-.264.288-1.008.984-1.008 2.4 0 1.416 1.032 2.784 1.176 2.976.144.192 2.03 3.1 4.92 4.347.688.297 1.224.474 1.642.607.69.22 1.318.189 1.815.115.554-.083 1.706-.697 1.947-1.371.24-.673.24-1.25.168-1.371-.072-.12-.264-.192-.552-.336z"/></svg>
+</a>
+
+<button class="chat-launcher" aria-label="Open AI Stylist chat">
+  <span class="dot"></span>
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+</button>
+
+<div class="chat-panel">
+  <div class="chat-head">
+    <div class="chat-head-title">
+      <div class="avatar">S</div>
+      <div>
+        <strong>Sonali Paithani Stylist</strong>
+        <span>AI-assisted · replies in seconds</span>
+      </div>
+    </div>
+    <button class="chat-close" aria-label="Close chat">&times;</button>
+  </div>
+  <div class="chat-body"></div>
+  <div class="chat-input-row">
+    <input type="text" placeholder="Or type your own message…" />
+    <button aria-label="Send"><svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg></button>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/api.js"></script>
+<script src="js/main.js"></script>
+<script src="js/chatbot.js"></script>
+<script src="js/tryon.js"></script>
+<script src="js/hero-slider.js"></script>
+<script>
+  // Featured grid (bestsellers) + occasion strip — home page only
+  document.addEventListener("DOMContentLoaded", async () => {
+    let featured = [];
+    if (window.Api) {
+      try {
+        const res = await window.Api.getSarees();
+        if (res && res.length) {
+          featured = res.filter(s => s.badge).slice(0, 4);
+          if (!featured.length) featured = res.slice(0, 4);
+        }
+      } catch (e) {
+        console.warn("[Home] Using local fallback for featured:", e);
+      }
+    }
+
+    if (!featured.length && typeof SAREES !== 'undefined') {
+      featured = SAREES.filter(s => s.badge).slice(0, 4);
+      if (!featured.length) featured = SAREES.slice(0, 4);
+    }
+
+    renderGrid(document.getElementById("featured-grid"), featured);
+
+    const strip = document.getElementById("occasion-strip");
+    if (strip && typeof OCCASION_GUIDE !== 'undefined') {
+      strip.innerHTML = Object.entries(OCCASION_GUIDE).map(([key, o]) => `
+        <a class="occasion-chip reveal" href="collections.html?occasion=${key}">
+          <div class="oc-dot"></div>
+          <span>${o.label}</span>
+        </a>
+      `).join("");
+    }
+    initScrollReveal();
+  });
+</script>
+</body>
+</html>

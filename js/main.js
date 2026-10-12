@@ -18,13 +18,20 @@ document.addEventListener("DOMContentLoaded", () => {
 function initMobileNav() {
   const toggle = document.querySelector(".nav-toggle");
   const drawer = document.querySelector(".mobile-drawer");
+  const closeBtn = document.querySelector(".nav-drawer-close");
   if (!toggle || !drawer) return;
   toggle.addEventListener("click", () => {
     drawer.classList.toggle("open");
   });
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => drawer.classList.remove("open"));
+  }
   drawer.querySelectorAll("a").forEach((a) =>
     a.addEventListener("click", () => drawer.classList.remove("open"))
   );
+  drawer.addEventListener("click", (e) => {
+    if (e.target === drawer) drawer.classList.remove("open");
+  });
 }
 
 /* ---------------- Scroll reveal ---------------- */
@@ -114,21 +121,23 @@ function formatINR(n) {
 }
 
 function productCardHTML(p) {
+  const imgSrc = p.image || `assets/products/${p.id}.jpg`;
+  const swatchStyle = `background:linear-gradient(155deg, ${p.swatch[0]}, ${p.swatch[1]})`;
   return `
     <article class="card reveal">
       <div class="card-media">
         ${p.badge ? `<span class="badge">${p.badge}</span>` : ""}
         <button class="wish" data-wish-btn="${p.id}" aria-label="Save to wishlist">&#9825;</button>
-        <a href="product.html?id=${p.id}">
-          <div class="swatch-motif" style="background:linear-gradient(155deg, ${p.swatch[0]}, ${p.swatch[1]})">
-            <div class="swatch-label">${p.weave}</div>
-          </div>
+        <a href="product.html?id=${p.id}" class="card-media-link" style="${swatchStyle}">
+          <img class="card-img" src="${imgSrc}" alt="${p.name}" loading="lazy" onerror="this.style.opacity='0';" />
+          <div class="card-gradient-veil"></div>
+          <div class="swatch-label">${p.weave}</div>
         </a>
       </div>
       <div class="card-body">
         <div class="card-tags">
           <span class="tag">${p.motif}</span>
-          <span class="tag">${OCCASION_GUIDE[p.occasion[0]]?.label || p.occasion[0]}</span>
+          <span class="tag">${(typeof OCCASION_GUIDE !== 'undefined' && OCCASION_GUIDE[p.occasion[0]]?.label) || p.occasion[0]}</span>
         </div>
         <h3><a href="product.html?id=${p.id}">${p.name}</a></h3>
         <div class="card-price">${formatINR(p.price)}</div>

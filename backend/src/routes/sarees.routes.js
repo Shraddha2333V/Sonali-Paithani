@@ -7,6 +7,7 @@ function formatSaree(row) {
   if (!row) return null;
   return {
     ...row,
+    image: row.image || `assets/products/${row.id}.jpg`,
     occasion: typeof row.occasion === 'string' ? JSON.parse(row.occasion) : row.occasion,
     swatch: typeof row.swatch === 'string' ? JSON.parse(row.swatch) : row.swatch
   };

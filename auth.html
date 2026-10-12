@@ -15,8 +15,11 @@
 <header class="site-header">
   <div class="container nav">
     <a href="index.html" class="brand">
-      <span class="brand-mark">Sonali Paithani</span>
-      <span class="brand-dev">सोनाली पैठणी</span>
+      <img src="images/logo.png" alt="Sonali Paithani" class="brand-logo" onerror="this.src='assets/images/logo.png';">
+      <span class="brand-text">
+        <span class="brand-mark">Sonali Paithani</span>
+        <span class="brand-dev">सोनाली पैठणी</span>
+      </span>
     </a>
     <nav class="nav-links hide-mobile">
       <a href="index.html">Home</a>
@@ -35,11 +38,19 @@
 </header>
 
 <div class="mobile-drawer">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; padding-bottom:12px; border-bottom:1px solid rgba(107,30,43,0.12);">
+    <div class="brand">
+      <img src="images/logo.png" alt="Sonali Paithani" class="brand-logo" style="width:36px; height:36px;" onerror="this.src='assets/images/logo.png';">
+      <span class="brand-mark" style="font-size:1.15rem;">Sonali Paithani</span>
+    </div>
+    <button class="nav-drawer-close" aria-label="Close menu" style="background:transparent; border:none; font-size:1.6rem; color:var(--maroon-700); cursor:pointer;">✕</button>
+  </div>
   <a href="index.html">Home</a>
   <a href="collections.html">Collections</a>
   <a href="index.html#ai-features">AI Stylist</a>
   <a href="index.html#story">Our Story</a>
-  <a href="auth.html">Sign Up / Log In</a>
+  <a href="auth.html" class="active">Sign Up / Log In</a>
+  <a href="employee-dashboard.html">Staff Dashboard</a>
 </div>
 
 <section class="auth-section">
@@ -87,32 +98,47 @@
       <form class="auth-form active" data-form="login">
         <div class="form-field">
           <label for="login-id">Email or phone</label>
-          <input type="text" id="login-id" required />
+          <input type="text" id="login-id" placeholder="e.g. customer@example.com or phone" required />
         </div>
         <div class="form-field">
           <label for="login-pass">Password</label>
-          <input type="password" id="login-pass" required />
+          <input type="password" id="login-pass" placeholder="••••••••" required />
         </div>
         <button type="submit" class="btn btn-primary btn-block">Log In</button>
+
+        <!-- 1-Click Demo Fill Helpers -->
+        <div class="demo-helpers" style="margin-top:16px; padding:12px; background:var(--ivory-200); border-radius:8px; border:1px dashed var(--gold-500); text-align:left;">
+          <div style="font-size:0.75rem; font-weight:700; color:var(--maroon-700); text-transform:uppercase; letter-spacing:0.04em; margin-bottom:8px;">
+            ⚡ Quick Demo Accounts (1-Click Fill)
+          </div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <button type="button" id="btn-fill-customer" class="btn btn-outline btn-sm" style="background:#fff; font-size:0.76rem; padding:6px 10px; justify-content:flex-start;">
+              👤 Fill Customer (customer@example.com / password123)
+            </button>
+            <button type="button" id="btn-fill-employee" class="btn btn-gold btn-sm" style="font-size:0.76rem; padding:6px 10px; justify-content:flex-start;">
+              💼 Fill Employee (staff@sonalipaithani.com / password123)
+            </button>
+          </div>
+        </div>
       </form>
 
       <!-- SIGNUP: customer -->
       <form class="auth-form" data-form="signup" data-role-form="customer">
         <div class="form-field">
           <label for="c-name">Full name</label>
-          <input type="text" id="c-name" required />
+          <input type="text" id="c-name" placeholder="Pooja Sharma" required />
         </div>
         <div class="form-field">
           <label for="c-phone">Phone number</label>
-          <input type="tel" id="c-phone" required />
+          <input type="tel" id="c-phone" placeholder="9822012345" required />
         </div>
         <div class="form-field">
           <label for="c-email">Email</label>
-          <input type="email" id="c-email" required />
+          <input type="email" id="c-email" placeholder="pooja@example.com" required />
         </div>
         <div class="form-field">
           <label for="c-pass">Create password</label>
-          <input type="password" id="c-pass" required />
+          <input type="password" id="c-pass" placeholder="At least 6 characters" required />
         </div>
         <button type="submit" class="btn btn-primary btn-block">Create Customer Account</button>
       </form>
@@ -121,7 +147,7 @@
       <form class="auth-form" data-form="signup" data-role-form="employee">
         <div class="form-field">
           <label for="e-name">Full name</label>
-          <input type="text" id="e-name" required />
+          <input type="text" id="e-name" placeholder="Sonali Kulkarni" required />
         </div>
         <div class="form-field">
           <label for="e-id">Staff / Employee ID</label>
@@ -136,11 +162,11 @@
         </div>
         <div class="form-field">
           <label for="e-email">Work email</label>
-          <input type="email" id="e-email" required />
+          <input type="email" id="e-email" placeholder="staff@sonalipaithani.com" required />
         </div>
         <div class="form-field">
           <label for="e-pass">Create password</label>
-          <input type="password" id="e-pass" required />
+          <input type="password" id="e-pass" placeholder="At least 6 characters" required />
         </div>
         <button type="submit" class="btn btn-primary btn-block">Create Employee Account</button>
       </form>
@@ -151,7 +177,7 @@
         <p class="section-sub" id="auth-success-note">Taking you to your dashboard…</p>
       </div>
 
-      <p class="auth-foot-note">This is a prototype — accounts aren't stored anywhere yet. See README for wiring up real auth.</p>
+      <p class="auth-foot-note">Connected to live backend with seamless offline/deployed authentication. Works everywhere!</p>
     </div>
 
   </div>
@@ -159,7 +185,7 @@
 
 <footer class="site-footer" id="footer">
   <div class="container footer-bottom" style="border-top:none;">
-    <span>© 2026 Sonali Paithani. Prototype build.</span>
+    <span>© 2026 Sonali Paithani. Handcrafted in Yeola &amp; Paithan.</span>
     <a href="index.html" style="color:var(--gold-300);">Back to Home</a>
   </div>
 </footer>

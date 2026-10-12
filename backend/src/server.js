@@ -55,8 +55,10 @@ app.use('/api/wishlist', wishlistRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/stylist', stylistRoutes);
 
-// Optional: static serving of frontend if run in unified mode
+// Static serving of frontend files
+const rootPath = path.join(__dirname, '..', '..');
 const frontendPath = path.join(__dirname, '..', '..', 'Sonali_Paithani_Final');
+app.use(express.static(rootPath));
 app.use(express.static(frontendPath));
 
 // 404 handler for unknown API routes

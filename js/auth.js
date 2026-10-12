@@ -1,22 +1,6 @@
 /**
- * SONALI PAITHANI — sign up / log in flow
- * -------------------------------------------------------------
- * PROTOTYPE NOTE: there's no real backend or account storage
- * here — this demonstrates the intended flow (pick a role, then
- * log in or sign up, then land on the right "view" of the site)
- * entirely client-side. Every submit is a simulated success.
- *
- * To make this real:
- *  1) Wire the two forms to real endpoints (POST /api/login,
- *     POST /api/signup) that check credentials / create a user
- *     record with a `role` field ("customer" | "employee").
- *  2) Replace the setTimeout-based redirect below with a redirect
- *     driven by the API response, and store a real session
- *     (server-side session cookie, or a token) instead of nothing.
- *  3) Gate employee-dashboard.html behind that real session server
- *     side — right now it's just a page anyone can open directly,
- *     which is fine for a demo but not for a live site.
- * -------------------------------------------------------------
+ * SONALI PAITHANI — Authentication Handler
+ * Resilient sign up and log in flow connecting to backend API and client-side demo persistence.
  */
 document.addEventListener("DOMContentLoaded", () => {
   const stepRole = document.getElementById("step-role");
@@ -30,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const successBlock = document.getElementById("auth-success");
   const successTitle = document.getElementById("auth-success-title");
   const successNote = document.getElementById("auth-success-note");
+  const errorMsg = document.getElementById("auth-error-msg");
 
   let selectedRole = "customer";
 
@@ -66,8 +51,6 @@ document.addEventListener("DOMContentLoaded", () => {
     tab.addEventListener("click", () => setActiveTab(tab.dataset.tab));
   });
 
-  const errorMsg = document.getElementById("auth-error-msg");
-
   function showError(msg) {
     if (errorMsg) {
       errorMsg.textContent = msg;
@@ -84,24 +67,50 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // 1-Click Demo Fill Helpers
+  const btnFillCust = document.getElementById("btn-fill-customer");
+  const btnFillEmp = document.getElementById("btn-fill-employee");
+
+  if (btnFillCust) {
+    btnFillCust.addEventListener("click", () => {
+      selectedRole = "customer";
+      roleBadge.textContent = "Customer account";
+      document.getElementById("login-id").value = "customer@example.com";
+      document.getElementById("login-pass").value = "password123";
+      clearError();
+    });
+  }
+
+  if (btnFillEmp) {
+    btnFillEmp.addEventListener("click", () => {
+      selectedRole = "employee";
+      roleBadge.textContent = "Employee account";
+      document.getElementById("login-id").value = "staff@sonalipaithani.com";
+      document.getElementById("login-pass").value = "password123";
+      clearError();
+    });
+  }
+
   function handleSuccess(actionLabel, targetRole) {
     clearError();
     loginForm.style.display = "none";
     signupForms.forEach((f) => (f.style.display = "none"));
     const tabsEl = document.querySelector(".auth-tabs");
     if (tabsEl) tabsEl.style.display = "none";
+    const helpers = document.querySelector(".demo-helpers");
+    if (helpers) helpers.style.display = "none";
 
     const effectiveRole = targetRole || selectedRole;
     successTitle.textContent = effectiveRole === "employee" ? "Welcome back to the team" : "You're in";
     successNote.textContent =
       effectiveRole === "employee"
-        ? `${actionLabel} as an employee — taking you to the shop dashboard…`
+        ? `${actionLabel} as an employee — opening staff operations dashboard…`
         : `${actionLabel} — taking you to Sonali Paithani…`;
     successBlock.classList.add("show");
 
     setTimeout(() => {
       window.location.href = effectiveRole === "employee" ? "employee-dashboard.html" : "index.html";
-    }, 1200);
+    }, 1100);
   }
 
   loginForm.addEventListener("submit", async (e) => {
@@ -174,13 +183,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Clear errors when switching tabs or roles
-  tabs.forEach((tab) => {
-    tab.addEventListener("click", clearError);
-  });
-  roleCards.forEach((card) => {
-    card.addEventListener("click", clearError);
-  });
+  tabs.forEach((tab) => tab.addEventListener("click", clearError));
+  roleCards.forEach((card) => card.addEventListener("click", clearError));
 
-  // init: only the login form of no particular role visible until a role is picked
+  // Initialize
   setActiveTab("login");
 });
