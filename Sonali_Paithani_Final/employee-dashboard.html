@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Staff Dashboard — Sonali Paithani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<div class="dash-shell">
+  <aside class="dash-sidebar">
+    <a href="index.html" class="brand" style="margin-bottom:4px;">
+      <span class="brand-mark">Sonali Paithani</span>
+      <span class="brand-dev">सोनाली पैठणी</span>
+    </a>
+    <div class="dash-tag">Staff Dashboard</div>
+    <nav class="dash-nav">
+      <a href="#" class="active"><span class="dash-dot"></span><span>Dashboard</span></a>
+      <a href="collections.html"><span class="dash-dot"></span><span>Inventory</span></a>
+      <a href="#bookings"><span class="dash-dot"></span><span>Bookings</span></a>
+      <a href="#" onclick="alert('Demo only — enquiry inbox isn\'t wired up yet.'); return false;"><span class="dash-dot"></span><span>Enquiries</span></a>
+      <a href="auth.html"><span class="dash-dot"></span><span>Log Out</span></a>
+    </nav>
+  </aside>
+
+  <main class="dash-main">
+    <div class="dash-topbar">
+      <div>
+        <h1>Welcome back</h1>
+        <p class="section-sub" style="margin:0;">Here's what's happening at the shop today.</p>
+      </div>
+      <div class="dash-user-chip">
+        <div class="avatar">S</div>
+        <div>
+          <strong style="display:block;font-size:0.86rem;">Shop Staff</strong>
+          <span style="font-size:0.76rem;color:var(--ink-500);">Yeola branch</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="dash-stats" id="dash-stats"></div>
+
+    <div class="dash-panel" id="bookings">
+      <div class="dash-panel-head">
+        <h3>Recent viewing requests</h3>
+        <span class="section-sub" style="margin:0;font-size:0.8rem;">Demo data</span>
+      </div>
+      <div style="overflow-x:auto;">
+        <table class="dash-table">
+          <thead>
+            <tr><th>Customer</th><th>Saree</th><th>Requested Date</th><th>Status</th></tr>
+          </thead>
+          <tbody id="bookings-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="dash-panel">
+      <div class="dash-panel-head">
+        <h3>Bestselling right now</h3>
+        <a href="collections.html" style="font-size:0.82rem;color:var(--maroon-700);font-weight:600;">View full catalog →</a>
+      </div>
+      <div style="overflow-x:auto;">
+        <table class="dash-table">
+          <thead>
+            <tr><th>Saree</th><th>Occasion</th><th>Price</th></tr>
+          </thead>
+          <tbody id="bestsellers-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <p class="section-sub" style="font-size:0.8rem;">
+      This dashboard is a prototype view for staff — it isn't connected to a real database yet.
+      See the project README for what to wire up before this goes live (real bookings data, inventory
+      editing, and login access control).
+    </p>
+  </main>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/api.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", async () => {
+    // 1. Session check & Role verification
+    const user = window.Api ? window.Api.getUser() : null;
+    const token = window.Api ? window.Api.getToken() : null;
+
+    if (!token || !user || (user.role !== "employee" && user.role !== "admin")) {
+      // Prompt and redirect if not logged in
+      const proceed = confirm("Staff access required. Would you like to log in as an employee?");
+      if (proceed) {
+        window.location.href = "auth.html";
+        return;
+      }
+    }
+
+    // 2. Personalize user chip
+    if (user) {
+      const avatarEl = document.querySelector(".dash-user-chip .avatar");
+      const nameEl = document.querySelector(".dash-user-chip strong");
+      const branchEl = document.querySelector(".dash-user-chip span");
+      if (avatarEl && user.name) avatarEl.textContent = user.name.charAt(0).toUpperCase();
+      if (nameEl && user.name) nameEl.textContent = user.name;
+      if (branchEl) branchEl.textContent = `${user.employee_id ? user.employee_id + ' · ' : ''}${user.location || 'Yeola'} branch`;
+    }
+
+    // 3. Connect Logout button
+    const logoutBtn = document.querySelector('a[href="auth.html"]');
+    if (logoutBtn) {
+      logoutBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (window.Api) window.Api.logout();
+        window.location.href = "auth.html";
+      });
+    }
+
+    // 4. Load live dashboard stats and bookings
+    async function loadDashboardData() {
+      try {
+        if (!window.Api) throw new Error("API client not available");
+
+        const data = await window.Api.getDashboardStats();
+        const stats = data.stats;
+        const bestsellers = data.bestsellers || [];
+        const bookings = data.recentBookings || [];
+
+        // Render stats cards
+        document.getElementById("dash-stats").innerHTML = `
+          <div class="stat-card"><div class="stat-num">${stats.totalSarees}</div><div class="stat-label">Sarees in catalog</div></div>
+          <div class="stat-card"><div class="stat-num">${stats.totalBookings}</div><div class="stat-label">Viewing requests total</div></div>
+          <div class="stat-card"><div class="stat-num">${stats.pendingBookings}</div><div class="stat-label">Awaiting confirmation</div></div>
+          <div class="stat-card"><div class="stat-num">₹${(stats.averagePrice / 1000).toFixed(0)}k</div><div class="stat-label">Average saree price</div></div>
+        `;
+
+        // Render bookings table with clickable status toggle
+        renderBookingsTable(bookings);
+
+        // Render bestsellers table
+        document.getElementById("bestsellers-body").innerHTML = bestsellers.map(p => `
+          <tr>
+            <td><strong>${p.name}</strong></td>
+            <td>${OCCASION_GUIDE[p.occasion[0]]?.label || p.occasion[0]}</td>
+            <td>₹${Number(p.price).toLocaleString("en-IN")}</td>
+          </tr>
+        `).join("");
+
+      } catch (err) {
+        console.warn("[Dashboard] Falling back to local preview data:", err);
+        fallbackLocalData();
+      }
+    }
+
+    function renderBookingsTable(bookings) {
+      const tbody = document.getElementById("bookings-body");
+      if (!bookings.length) {
+        tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;color:var(--ink-500);padding:24px;">No viewing requests found.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = bookings.map(b => `
+        <tr>
+          <td>
+            <strong>${b.customer_name || b.customer}</strong>
+            ${b.customer_phone ? `<div style="font-size:0.75rem;color:var(--ink-500);">${b.customer_phone}</div>` : ''}
+          </td>
+          <td>${b.saree_name || b.saree}</td>
+          <td>${b.preferred_date || b.date || 'TBD'}</td>
+          <td>
+            <button class="status-pill status-${b.status}" data-booking-id="${b.id}" data-current-status="${b.status}" title="Click to change status" style="cursor:pointer;border:none;">
+              ${b.status === "confirmed" ? "Confirmed ✓" : "Pending ⏳"}
+            </button>
+          </td>
+        </tr>
+      `).join("");
+
+      // Wire interactive status toggling
+      tbody.querySelectorAll("button[data-booking-id]").forEach(btn => {
+        btn.addEventListener("click", async () => {
+          const id = btn.dataset.bookingId;
+          const current = btn.dataset.currentStatus;
+          const newStatus = current === "confirmed" ? "pending" : "confirmed";
+          btn.disabled = true;
+          btn.textContent = "Updating…";
+          try {
+            await window.Api.updateBookingStatus(id, newStatus);
+            await loadDashboardData(); // Refresh metrics and table
+          } catch (e) {
+            alert("Could not update booking: " + e.message);
+            btn.disabled = false;
+          }
+        });
+      });
+    }
+
+    function fallbackLocalData() {
+      const pending = MOCK_BOOKINGS.filter(b => b.status === "pending").length;
+      document.getElementById("dash-stats").innerHTML = `
+        <div class="stat-card"><div class="stat-num">${SAREES.length}</div><div class="stat-label">Sarees in catalog</div></div>
+        <div class="stat-card"><div class="stat-num">${MOCK_BOOKINGS.length}</div><div class="stat-label">Viewing requests this week</div></div>
+        <div class="stat-card"><div class="stat-num">${pending}</div><div class="stat-label">Awaiting confirmation</div></div>
+        <div class="stat-card"><div class="stat-num">₹${(SAREES.reduce((s,p)=>s+p.price,0)/SAREES.length/1000).toFixed(0)}k</div><div class="stat-label">Average saree price</div></div>
+      `;
+      document.getElementById("bookings-body").innerHTML = MOCK_BOOKINGS.map(b => `
+        <tr>
+          <td>${b.customer}</td>
+          <td>${b.saree}</td>
+          <td>${b.date}</td>
+          <td><span class="status-pill status-${b.status}">${b.status === "confirmed" ? "Confirmed" : "Pending"}</span></td>
+        </tr>
+      `).join("");
+      document.getElementById("bestsellers-body").innerHTML = SAREES.filter(s => s.badge).map(p => `
+        <tr>
+          <td>${p.name}</td>
+          <td>${OCCASION_GUIDE[p.occasion[0]]?.label || p.occasion[0]}</td>
+          <td>₹${p.price.toLocaleString("en-IN")}</td>
+        </tr>
+      `).join("");
+    }
+
+    loadDashboardData();
+  });
+</script>
+</body>
+</html>

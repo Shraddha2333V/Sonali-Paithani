@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sign Up / Log In — Sonali Paithani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<div class="announce-bar">Book a <strong>free styling consultation</strong> this festive season — limited slots at the Yeola shop.</div>
+
+<header class="site-header">
+  <div class="container nav">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">Sonali Paithani</span>
+      <span class="brand-dev">सोनाली पैठणी</span>
+    </a>
+    <nav class="nav-links hide-mobile">
+      <a href="index.html">Home</a>
+      <a href="collections.html">Shop By</a>
+      <a href="collections.html">Occasion</a>
+      <a href="collections.html">Best Seller</a>
+      <a href="index.html#ai-features">AI Stylist</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="auth.html" class="icon-btn hide-mobile active" aria-label="Account">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"/></svg>
+      </a>
+      <button class="nav-toggle show-mobile" aria-label="Menu"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-drawer">
+  <a href="index.html">Home</a>
+  <a href="collections.html">Collections</a>
+  <a href="index.html#ai-features">AI Stylist</a>
+  <a href="index.html#story">Our Story</a>
+  <a href="auth.html">Sign Up / Log In</a>
+</div>
+
+<section class="auth-section">
+  <div class="auth-card">
+
+    <!-- STEP 1: role selection -->
+    <div class="auth-step active" id="step-role">
+      <div class="eyebrow" style="justify-content:center;">Welcome</div>
+      <h2 class="section-title text-center" style="margin-bottom:6px;">Who's signing in?</h2>
+      <p class="section-sub text-center">Choose an account type to continue.</p>
+      <div class="role-grid">
+        <div class="role-card" data-role="customer">
+          <div class="role-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"/></svg>
+          </div>
+          <h4>Customer</h4>
+          <p>Browse the collection, save favourites, and book viewings.</p>
+        </div>
+        <div class="role-card" data-role="employee">
+          <div class="role-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+          </div>
+          <h4>Employee</h4>
+          <p>Manage inventory, bookings and customer enquiries.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: login / signup form, shown per role -->
+    <div class="auth-step" id="step-form">
+      <button class="auth-back" id="auth-back-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back
+      </button>
+      <div class="auth-role-badge" id="auth-role-badge">Customer account</div>
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-tab="login">Log In</button>
+        <button class="auth-tab" data-tab="signup">Sign Up</button>
+      </div>
+
+      <div class="auth-error-msg" id="auth-error-msg" style="display:none; color:#b23a5c; background:#faecee; border:1px solid #f2c7ce; padding:10px 14px; border-radius:6px; font-size:0.88rem; margin-bottom:16px; text-align:center;"></div>
+
+      <!-- LOGIN -->
+      <form class="auth-form active" data-form="login">
+        <div class="form-field">
+          <label for="login-id">Email or phone</label>
+          <input type="text" id="login-id" required />
+        </div>
+        <div class="form-field">
+          <label for="login-pass">Password</label>
+          <input type="password" id="login-pass" required />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Log In</button>
+      </form>
+
+      <!-- SIGNUP: customer -->
+      <form class="auth-form" data-form="signup" data-role-form="customer">
+        <div class="form-field">
+          <label for="c-name">Full name</label>
+          <input type="text" id="c-name" required />
+        </div>
+        <div class="form-field">
+          <label for="c-phone">Phone number</label>
+          <input type="tel" id="c-phone" required />
+        </div>
+        <div class="form-field">
+          <label for="c-email">Email</label>
+          <input type="email" id="c-email" required />
+        </div>
+        <div class="form-field">
+          <label for="c-pass">Create password</label>
+          <input type="password" id="c-pass" required />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Create Customer Account</button>
+      </form>
+
+      <!-- SIGNUP: employee -->
+      <form class="auth-form" data-form="signup" data-role-form="employee">
+        <div class="form-field">
+          <label for="e-name">Full name</label>
+          <input type="text" id="e-name" required />
+        </div>
+        <div class="form-field">
+          <label for="e-id">Staff / Employee ID</label>
+          <input type="text" id="e-id" placeholder="e.g. SP-014" required />
+        </div>
+        <div class="form-field">
+          <label for="e-location">Shop location</label>
+          <select id="e-location">
+            <option>Yeola</option>
+            <option>Paithan</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="e-email">Work email</label>
+          <input type="email" id="e-email" required />
+        </div>
+        <div class="form-field">
+          <label for="e-pass">Create password</label>
+          <input type="password" id="e-pass" required />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Create Employee Account</button>
+      </form>
+
+      <div class="auth-success" id="auth-success">
+        <div class="tick" style="width:54px;height:54px;border-radius:50%;background:var(--teal-600);color:#fff;display:grid;place-items:center;margin:0 auto 16px;font-size:1.5rem;">✓</div>
+        <h4 id="auth-success-title">You're in</h4>
+        <p class="section-sub" id="auth-success-note">Taking you to your dashboard…</p>
+      </div>
+
+      <p class="auth-foot-note">This is a prototype — accounts aren't stored anywhere yet. See README for wiring up real auth.</p>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer" id="footer">
+  <div class="container footer-bottom" style="border-top:none;">
+    <span>© 2026 Sonali Paithani. Prototype build.</span>
+    <a href="index.html" style="color:var(--gold-300);">Back to Home</a>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/api.js"></script>
+<script src="js/main.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>
